@@ -1,0 +1,80 @@
+#include "mesh.h"
+
+Mesh::Mesh(){}
+
+Mesh::~Mesh(){}
+void
+Mesh::carregarArquivo(string nomeArquivo)
+{
+  ifstream arquivo(nomeArquivo.c_str());
+
+  if(!arquivo.is_open())
+  {
+    cout << "Não foi possível abrir o aquivo!!!" << endl;
+    exit(-1);
+  }
+
+  string tipo;
+  getline(arquivo, tipo);
+  
+  if(tipo.find("OFF") == string::npos)
+  {
+    cout << "Tipo de arquivo invalido!!!" << endl;
+    exit(-1);
+  }
+
+  string line;
+  getline(arquivo, line);
+
+  stringstream ss (line);
+  ss >> this->qtdPontos >> this->qtdArestas >> this->qtdTextura;
+
+  for(int i=0; i<this->qtdPontos; i++)
+  {
+    string linha;
+
+    getline(arquivo, linha);
+    stringstream buffer(linha);
+
+    float x, y, z;
+    int r, g, b, alpha;
+
+    if(tipo.find("COFF") != string::npos)
+    {
+      buffer >> x >> y >> z >> r >> g >> b >> alpha;
+      this->vertex.push_back(Vertex(x, y, z, r, g, b, alpha));
+    }
+    else if(tipo.find("OFF") != string::npos)
+    {
+      buffer >> x >> y >> z;
+      this->vertex.push_back(Vertex(x, y, z, 127, 127, 127, 0));
+    }
+
+  }
+
+  for(int j=0; j<this->qtdArestas; j++)
+  {
+    string linha;
+
+    getline(arquivo, linha);
+    stringstream buffer(linha);
+
+    unsigned int valor, indice1, indice2, indice3;
+
+    buffer >> valor >> indice1 >> indice2 >> indice3;
+
+    this->indice.push_back(indice1);
+    this->indice.push_back(indice2);
+    this->indice.push_back(indice3);
+  } 
+
+  arquivo.close();
+
+  this->deltaX = this->encontrarDeltaX();
+  this->deltaY = this->encontrarDeltaY();
+  this->deltaZ = this->encontrarDeltaZ();
+}
+vector<Vertex> Mesh::getVertex() { return this->vertex; }
+vector<unsigned int> Mesh::getIndice() { return this->indice; }
+
+

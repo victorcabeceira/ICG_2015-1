@@ -1,0 +1,46 @@
+#include "CG.h"
+
+//Inicialização da janela SDL/Inicia OpenGL
+GerenciadorGrafico::GerenciadorGrafico(int largura, int altura)
+{
+
+}
+
+GerenciadorGrafico::~GerenciadorGrafico()
+{
+
+}
+
+void 
+GerenciadorGrafico::iniciarGL()
+{
+    glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
+}
+
+//Atualiza a viewport da tela
+int 
+GerenciadorGrafico::setViewPort(int largura, int altura)
+{
+   
+}
+
+//Delay - 
+void 
+GerenciadorGrafico::delay(int tempo)
+{
+
+}
+
+// Inicia Buffers OpenGL (glClear) e crear color
+void 
+GerenciadorGrafico::iniciarRender()
+{
+	
+}
+
+void 
+GerenciadorGrafico::displayRender()
+{
+  	SDL_GL_SwapWindow(this->janela);
+}
+

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['vector3f',['Vector3f',['../structVector3f.html',1,'']]]
+  ['directionallight',['DirectionalLight',['../structDirectionalLight.html',1,'']]]
 ];

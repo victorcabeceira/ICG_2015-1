@@ -37,7 +37,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -62,6 +61,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -69,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -94,6 +94,63 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac2caf1fd41076826fe50b3a527ef90db"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac2caf1fd41076826fe50b3a527ef90db"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Vector3f</b> (float _x, float _y, float _z)</td></tr>
 <tr class="separator:ac2caf1fd41076826fe50b3a527ef90db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0866ef2153242165a626102b48284b34"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0866ef2153242165a626102b48284b34"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Vector3f</b> (float f)</td></tr>
+<tr class="separator:a0866ef2153242165a626102b48284b34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb9089cd5b410ea28b1d1db63fc550f8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abb9089cd5b410ea28b1d1db63fc550f8"></a>
+<a class="el" href="structVector3f.html">Vector3f</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator+=</b> (const <a class="el" href="structVector3f.html">Vector3f</a> &amp;r)</td></tr>
+<tr class="separator:abb9089cd5b410ea28b1d1db63fc550f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63ec561fd67ea011aa973c0549d48a26"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a63ec561fd67ea011aa973c0549d48a26"></a>
+<a class="el" href="structVector3f.html">Vector3f</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator-=</b> (const <a class="el" href="structVector3f.html">Vector3f</a> &amp;r)</td></tr>
+<tr class="separator:a63ec561fd67ea011aa973c0549d48a26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0449c07194a079d3eb57961e374e96ee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0449c07194a079d3eb57961e374e96ee"></a>
+<a class="el" href="structVector3f.html">Vector3f</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator*=</b> (float f)</td></tr>
+<tr class="separator:a0449c07194a079d3eb57961e374e96ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7cb77a7d58c931f103cd8d160e765c6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af7cb77a7d58c931f103cd8d160e765c6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>operator const float *</b> () const </td></tr>
+<tr class="separator:af7cb77a7d58c931f103cd8d160e765c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa08a1a02eb2e991f26231edeb0811acf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa08a1a02eb2e991f26231edeb0811acf"></a>
+<a class="el" href="structVector3f.html">Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Cross</b> (const <a class="el" href="structVector3f.html">Vector3f</a> &amp;v) const </td></tr>
+<tr class="separator:aa08a1a02eb2e991f26231edeb0811acf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a0691180fe77995945f2a864ff0d1d6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6a0691180fe77995945f2a864ff0d1d6"></a>
+<a class="el" href="structVector3f.html">Vector3f</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>Normalize</b> ()</td></tr>
+<tr class="separator:a6a0691180fe77995945f2a864ff0d1d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa38c378d40f62c1430271571093674ac"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa38c378d40f62c1430271571093674ac"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>Rotate</b> (float Angle, const <a class="el" href="structVector3f.html">Vector3f</a> &amp;Axis)</td></tr>
+<tr class="separator:aa38c378d40f62c1430271571093674ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62c1600e55fde7646bebbbcb2cca2fe3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a62c1600e55fde7646bebbbcb2cca2fe3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>Print</b> () const </td></tr>
+<tr class="separator:a62c1600e55fde7646bebbbcb2cca2fe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2caf1fd41076826fe50b3a527ef90db"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac2caf1fd41076826fe50b3a527ef90db"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Vector3f</b> (float _x, float _y, float _z)</td></tr>
+<tr class="separator:ac2caf1fd41076826fe50b3a527ef90db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0866ef2153242165a626102b48284b34"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0866ef2153242165a626102b48284b34"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Vector3f</b> (float f)</td></tr>
+<tr class="separator:a0866ef2153242165a626102b48284b34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb9089cd5b410ea28b1d1db63fc550f8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abb9089cd5b410ea28b1d1db63fc550f8"></a>
+<a class="el" href="structVector3f.html">Vector3f</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator+=</b> (const <a class="el" href="structVector3f.html">Vector3f</a> &amp;r)</td></tr>
+<tr class="separator:abb9089cd5b410ea28b1d1db63fc550f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63ec561fd67ea011aa973c0549d48a26"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a63ec561fd67ea011aa973c0549d48a26"></a>
+<a class="el" href="structVector3f.html">Vector3f</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator-=</b> (const <a class="el" href="structVector3f.html">Vector3f</a> &amp;r)</td></tr>
+<tr class="separator:a63ec561fd67ea011aa973c0549d48a26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0449c07194a079d3eb57961e374e96ee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0449c07194a079d3eb57961e374e96ee"></a>
+<a class="el" href="structVector3f.html">Vector3f</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator*=</b> (float f)</td></tr>
+<tr class="separator:a0449c07194a079d3eb57961e374e96ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7cb77a7d58c931f103cd8d160e765c6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af7cb77a7d58c931f103cd8d160e765c6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>operator const float *</b> () const </td></tr>
+<tr class="separator:af7cb77a7d58c931f103cd8d160e765c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa08a1a02eb2e991f26231edeb0811acf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa08a1a02eb2e991f26231edeb0811acf"></a>
+<a class="el" href="structVector3f.html">Vector3f</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Cross</b> (const <a class="el" href="structVector3f.html">Vector3f</a> &amp;v) const </td></tr>
+<tr class="separator:aa08a1a02eb2e991f26231edeb0811acf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a029dc1940f2ded84c933d89179ae95c6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a029dc1940f2ded84c933d89179ae95c6"></a>
+<a class="el" href="structVector3f.html">Vector3f</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>Normalize</b> ()</td></tr>
+<tr class="separator:a029dc1940f2ded84c933d89179ae95c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa38c378d40f62c1430271571093674ac"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa38c378d40f62c1430271571093674ac"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>Rotate</b> (float Angle, const <a class="el" href="structVector3f.html">Vector3f</a> &amp;Axis)</td></tr>
+<tr class="separator:aa38c378d40f62c1430271571093674ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62c1600e55fde7646bebbbcb2cca2fe3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a62c1600e55fde7646bebbbcb2cca2fe3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>Print</b> () const </td></tr>
+<tr class="separator:a62c1600e55fde7646bebbbcb2cca2fe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -107,13 +164,15 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>y</b></td></tr>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>z</b></td></tr>
 <tr class="separator:a470cff51eb6463672be518f5af4e26db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this struct was generated from the following file:<ul>
+<hr/>The documentation for this struct was generated from the following files:<ul>
 <li><a class="el" href="math__3d_8h_source.html">math_3d.h</a></li>
+<li><a class="el" href="ogldev__math__3d_8h_source.html">ogldev_math_3d.h</a></li>
+<li>math_3d.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2015 21:34:08 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 27 2015 22:27:19 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

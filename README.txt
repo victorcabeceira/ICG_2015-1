@@ -1,24 +1,42 @@
 
 ARQUIVOS
 --------------------------------------------------
-main.cpp
+
+main1.cpp
+CG.cpp / CG.h
+camera.cpp / camera.h
+math_3d.cpp
+lighting.fs / lighting.vs
+lighting_technique.cpp / lighting_technique.h
+math_3d.cpp / math_3d.h
+mesh.cpp / mesh.h
+ogldev_math_3d.h
+ogldev_texture.cpp / ogldev_texture.h
+ogldev_types.h
+ogldev_util.cpp / ogldev_util.h
+pipeline.cpp / pipeline.h
+shader.cpp / shader.fs / shader.vs
+technique.cpp / technique.h
+vec.h
 
 README.txt
+Doxyfile
+
+mapa.obj
+nave.obj
 
 
 INSTRUÇÕES
 --------------------------------------------------
 AS BIBLIOTECAS NECESSÁRIAS SÃO (A lib lGLEW deve ser add para utilizar o opengl3.x):
--lSDL2 -lGL -lGLU -lGLEW
+-lGL -lGLU -lSDL2 -lGLEW -lSDL2_image
 
 COMPILANDO O PROJETO (LINUX)
 ----------------------------------------------------
-Dê permissão de execução para o script compilar.sh (chmod u+x 666 compilar.sh) e execute-o (./compilar.sh)
-
 Será gerado um executável do projeto com o nome "prog"
 
-
+make
 
 EXECUTANDO O PROJETO (LINUX)
 -----------------------------------------------------
-./prog 
+optirun ./prog nomeArquivoObj

@@ -15,6 +15,10 @@
 static constexpr int WINDOW_WIDTH  = 960;
 static constexpr int WINDOW_HEIGHT = 540;
 
+#define ACELERAR true
+#define FREIAR false
+
+
 class Main : public ICallbacks
 {
 public:
@@ -102,7 +106,8 @@ public:
 
 
         p.Scale(1.f, 1.f, 1.f);
-        p.Rotate(0.0f, m_scale + 45.0, 0.0f);
+        p.Rotate(0.0f, -m_scale + 180.0 , 0.0f);
+        calcPosition(flag,aceleracao);
         p.WorldPos(pos[0], 1.5f, pos[2]);
         m_pEffect->SetWVP(p.GetWVPTrans());
         m_pEffect->SetWorldMatrix(p.GetWorldTrans());
@@ -112,10 +117,6 @@ public:
         angle = (angle*180.f)/M_PI;
         printf ("%f\n", angle);*/
         //printf ("%f %f %f\n", pos[0], pos[1], pos[2]);
-
-        posAntiga[0] = pos[0];
-        posAntiga[1] = pos[1];
-        posAntiga[2] = pos[2];
 
         /*p.Scale(5.0f, 0.0f, 25.0f);
         p.WorldPos(0.2f, -0.5f, 9.2f);
@@ -140,26 +141,61 @@ public:
             m_directionalLight.AmbientIntensity -= 0.05f;
         }
         else if(OgldevKey == OGLDEV_KEY_A){
-          m_scale += 2.5f;
-          if (m_scale >= 360.0f)
-            m_scale /= 360.0f;
+            m_scale -= 4.0f;
+              if (m_scale <= -360.0f)
+              m_scale /= 360.0f;
         }
         else if(OgldevKey == OGLDEV_KEY_D){
-            m_scale -= 2.5f;
-            if (m_scale <= -360.0f)
+            m_scale += 4.0f;
+              if (m_scale >= 360.0f)
               m_scale /= 360.0f;
         }
         else if(OgldevKey == OGLDEV_KEY_W){
-          m_front -= 2.0f;
-          pos[0] -= sin(M_PI * (m_scale) / 180) *.5;
-          pos[2] -= cos(M_PI * (m_scale) / 180) *.5;
-
+            flag = ACELERAR;
+            aceleracao *= 1.75;
         }
         else if(OgldevKey == OGLDEV_KEY_S){
-          m_front += 2.0f;
-          pos[0] += sin(M_PI * (m_scale) / 180) *.5;
-          pos[2] += cos(M_PI * (m_scale) / 180) *.5;
+          if(aceleracao >= 1.521){
+            if(aceleracao >1.725){
+              flag = ACELERAR;
+              aceleracao /= 1.25;
+            }
+            else{
+              aceleracao = 1.0;
+            }
+          }
+          else{
+            flag = FREIAR;
+            aceleracao *= 1.15;
+          }
+
         }
+
+        /*else if(OgldevKey == OGLDEV_KEY_S){
+          flag =ACELERAR;
+
+          if(aceleracao >= 0.0){
+            aceleracao /= 1.25;
+          }
+          else{
+            aceleracao = 0.99;
+          }
+
+        }
+
+        */
+        else if(OgldevKey == OGLDEV_KEY_Z){
+          flag =FREIAR;
+
+          if(aceleracao >= 0.0){
+            aceleracao *= 1.25;
+          }
+          else{
+            aceleracao = 0.99;
+          }
+
+        }
+
         else if(OgldevKey == OGLDEV_KEY_R){
           pos[0] = 0;
           pos[2] = 0;
@@ -174,10 +210,23 @@ public:
         printf("GetTarget %f,%f,%f",m_pGameCamera->GetTarget().x,m_pGameCamera->GetTarget().y,m_pGameCamera->GetTarget().z);
         printf("GetUp %f,%f,%f\n",m_pGameCamera->GetUp().x,m_pGameCamera->GetUp().y,m_pGameCamera->GetUp().z);*/
 
-        printf("POSICAO %f  %f \n, M_SCALE %f \n",pos[0],pos[0],m_scale);
+        printf("aceleracao %f  \n, M_SCALE %f \n",aceleracao,m_scale);
+        printf("Pos %f   %f \n",pos[0],pos[2]);
 
     }
+    void calcPosition(bool flag,int aceleracao){
+      int sinal = 1;
+      if(flag == true){
+        sinal = -1;
+      }
+      else{
+        sinal = 1;
+      }
 
+      pos[0] += ((sin(M_PI * (m_scale) / 180) *.005)* sinal)*aceleracao;
+      pos[2] += ((cos(M_PI * (m_scale) / 180) *.005)* sinal)*aceleracao;
+
+    }
 
     virtual void PassiveMouseCB(int x, int y) override
     {
@@ -195,10 +244,11 @@ private:
     Camera* m_pGameCamera;
     float m_scale=0;
     float m_front;
+    bool flag;
+    float aceleracao = 0.99;
 //  float angle;
 //    float pos[3] = {16.5,1.5,16.5};
-    float pos[3] = {0,0,0};
-    float posAntiga[3] = {0,0,0};
+    float pos[3] = {0.1,0.1,0.1};
     DirectionalLight m_directionalLight;
 };
 

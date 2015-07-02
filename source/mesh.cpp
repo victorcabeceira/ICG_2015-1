@@ -48,7 +48,7 @@ void Mesh::Clear()
 
 bool Mesh::LoadMesh(const std::string& Filename)
 {
-    // Удаляем данные предыдущей модели (если она была загружена)
+    // Remove o modelo anterior se ele estiver carregado
     Clear();
 
     bool Ret = false;
@@ -74,7 +74,7 @@ bool Mesh::InitFromScene(const aiScene* pScene, const std::string& Filename)
     m_Entries.resize(pScene->mNumMeshes);
     m_Textures.resize(pScene->mNumMaterials);
 
-    // Инициализируем меши один за другим
+    // Inicializa os meshes 1 por 1
     for (unsigned int i = 0; i < m_Entries.size(); i++){
         const aiMesh* paiMesh = pScene->mMeshes[i];
         InitMesh(i, paiMesh);
@@ -116,7 +116,7 @@ void Mesh::InitMesh(unsigned int Index, const aiMesh* paiMesh)
 
 bool Mesh::InitMaterials(const aiScene* pScene, const std::string& Filename)
 {
-    // Извлекаем директорию из полного имени файла
+    // Obtém o diretório do nome completo do arquivo
     std::string::size_type SlashIndex = Filename.find_last_of("/");
     std::string Dir;
 
@@ -132,7 +132,7 @@ bool Mesh::InitMaterials(const aiScene* pScene, const std::string& Filename)
 
     bool Ret = true;
 
-    // Инициализируем материал
+    // Inicializa a textura
     for (unsigned int i = 0; i< pScene->mNumMaterials; i++){
         const aiMaterial* pMaterial = pScene->mMaterials[i];
 
@@ -154,9 +154,9 @@ bool Mesh::InitMaterials(const aiScene* pScene, const std::string& Filename)
             }
         }
 
-        // Загружаем белую текстуру если модель не имеет собственной
+        // Carrega textura padrão caso o arquivo não possua uma - Nesse caso a textura do circuto
         if (!m_Textures[i]){
-            m_Textures[i] = new Texture(GL_TEXTURE_2D, "../Content/white.png");
+            m_Textures[i] = new Texture(GL_TEXTURE_2D, "../Content/Mapa/mapTexture.jpg");
             Ret = m_Textures[i]->Load();
         }
     }

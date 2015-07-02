@@ -89,7 +89,7 @@ public:
         // std::cout << "scale: " << m_scale << std::endl;
 
         Pipeline p;
-        p.Scale(0.8f, 0.8f, 0.8f);
+        p.Scale(1.0f, 1.0f, 1.0f);
         p.Rotate(0.0f, 0.0f, 0.0f);
         p.WorldPos(0.0f, 0.0f, 0.0f);
         //printf("%f\n",m_scale);
@@ -156,7 +156,7 @@ public:
         }
         else if(OgldevKey == OGLDEV_KEY_S){
           if(aceleracao >= 1.521){
-            if(aceleracao >1.725){
+            if(aceleracao >1.75){
               flag = ACELERAR;
               aceleracao /= 1.25;
             }

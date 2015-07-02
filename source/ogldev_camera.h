@@ -50,7 +50,7 @@ public:
     {
         return m_up;
     }
-    const void SetTarget(Vector3f vec) const
+    void SetTarget(Vector3f vec)
     {
          m_pos.x = vec.x;
          m_pos.y = vec.y;

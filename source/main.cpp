@@ -102,7 +102,7 @@ public:
 
 
         p.Scale(1.f, 1.f, 1.f);
-        p.Rotate(0.0f, 0.0f, 0.0f);
+        p.Rotate(0.0f, m_scale + 45.0, 0.0f);
         p.WorldPos(pos[0], 1.5f, pos[2]);
         m_pEffect->SetWVP(p.GetWVPTrans());
         m_pEffect->SetWorldMatrix(p.GetWorldTrans());
@@ -117,11 +117,11 @@ public:
         posAntiga[1] = pos[1];
         posAntiga[2] = pos[2];
 
-        p.Scale(5.0f, 0.0f, 25.0f);
+        /*p.Scale(5.0f, 0.0f, 25.0f);
         p.WorldPos(0.2f, -0.5f, 9.2f);
         m_pEffect->SetWVP(p.GetWVPTrans());
         m_pEffect->SetWorldMatrix(p.GetWorldTrans());
-        m_mesh_quad->Render();
+        m_mesh_quad->Render();*/
 
         GLFWBackendSwapBuffers();
     }
@@ -139,35 +139,43 @@ public:
         else if(OgldevKey == OGLDEV_KEY_O) {
             m_directionalLight.AmbientIntensity -= 0.05f;
         }
-        else if(OgldevKey == OGLDEV_KEY_D){
+        else if(OgldevKey == OGLDEV_KEY_A){
           m_scale += 2.5f;
-          if (m_scale <= -360.0f)
+          if (m_scale >= 360.0f)
             m_scale /= 360.0f;
         }
-        else if(OgldevKey == OGLDEV_KEY_A){
+        else if(OgldevKey == OGLDEV_KEY_D){
             m_scale -= 2.5f;
-            if (m_scale >= 360.0f)
+            if (m_scale <= -360.0f)
               m_scale /= 360.0f;
         }
         else if(OgldevKey == OGLDEV_KEY_W){
           m_front -= 2.0f;
-          pos[0] -= sin(M_PI * m_scale / 180) *.5;
-          pos[2] -= cos(M_PI * m_scale / 180) *.5;
+          pos[0] -= sin(M_PI * (m_scale) / 180) *.5;
+          pos[2] -= cos(M_PI * (m_scale) / 180) *.5;
 
         }
         else if(OgldevKey == OGLDEV_KEY_S){
           m_front += 2.0f;
-          pos[0] += sin(M_PI * m_scale / 180) *.5;
-          pos[2] += cos(M_PI * m_scale / 180) *.5;
+          pos[0] += sin(M_PI * (m_scale) / 180) *.5;
+          pos[2] += cos(M_PI * (m_scale) / 180) *.5;
+        }
+        else if(OgldevKey == OGLDEV_KEY_R){
+          pos[0] = 0;
+          pos[2] = 0;
+
         }
       //  m_pGameCamera->OnKeyboard(OgldevKey);
 
 
-        m_pGameCamera->SetTarget(man);
+      //  m_pGameCamera->SetTarget(man);
 
-        printf("GetPos %f,%f,%f",m_pGameCamera->GetPos().x,m_pGameCamera->GetPos().y,m_pGameCamera->GetPos().z);
+/*        printf("GetPos %f,%f,%f",m_pGameCamera->GetPos().x,m_pGameCamera->GetPos().y,m_pGameCamera->GetPos().z);
         printf("GetTarget %f,%f,%f",m_pGameCamera->GetTarget().x,m_pGameCamera->GetTarget().y,m_pGameCamera->GetTarget().z);
-        printf("GetUp %f,%f,%f\n",m_pGameCamera->GetUp().x,m_pGameCamera->GetUp().y,m_pGameCamera->GetUp().z);
+        printf("GetUp %f,%f,%f\n",m_pGameCamera->GetUp().x,m_pGameCamera->GetUp().y,m_pGameCamera->GetUp().z);*/
+
+        printf("POSICAO %f  %f \n, M_SCALE %f \n",pos[0],pos[0],m_scale);
+
     }
 
 
@@ -185,7 +193,7 @@ private:
     Mesh* m_mesh_mapa;
     Mesh* m_mesh_quad;
     Camera* m_pGameCamera;
-    float m_scale;
+    float m_scale=0;
     float m_front;
 //  float angle;
 //    float pos[3] = {16.5,1.5,16.5};

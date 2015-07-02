@@ -1,0 +1,10 @@
+https://github.com/triplepointfive/ogldev
+
+sudo apt-get install -y libglew-dev freeglut3-dev libmagick++-dev libglfw3-dev libassimp-dev cmake automake
+
+git clone https://github.com/triplepointfive/ogldev.git
+cd ogldev
+mkdir build
+cd build
+cmake -B./ -H../
+make

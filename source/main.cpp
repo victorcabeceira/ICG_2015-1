@@ -46,7 +46,7 @@ public:
     bool Init()
     {
         Vector3f Pos(-12.776764f, 6.532981f, 16.077847f);
-        Vector3f Target( 0.777163f, -0.133986f, -0.614871f);
+        Vector3f Target( pos[0]+0.777163f, -0.133986f, pos[2]+(-0.614871f));
         Vector3f Up( 0.105076, 0.990983f, -0.083134f);
         m_pGameCamera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT, Pos, Target, Up);
 
@@ -104,6 +104,8 @@ public:
         m_mesh_mapa->Render();
 
 
+        Vector3f man(pos[0]-10.5f, 8.0f, pos[2]+10.5f);
+          m_pGameCamera->SetTarget(man);
 
         p.Scale(1.f, 1.f, 1.f);
         p.Rotate(0.0f, -m_scale + 180.0 , 0.0f);
@@ -129,7 +131,7 @@ public:
 
 
     virtual void KeyboardCB(OGLDEV_KEY OgldevKey) override
-    {   Vector3f man(pos[0],0,pos[2]);
+    {
 
         if(OgldevKey == OGLDEV_KEY_Q) {
             glfwSetWindowShouldClose(Window(), GL_TRUE);
@@ -203,8 +205,6 @@ public:
         }
       //  m_pGameCamera->OnKeyboard(OgldevKey);
 
-
-      //  m_pGameCamera->SetTarget(man);
 
 /*        printf("GetPos %f,%f,%f",m_pGameCamera->GetPos().x,m_pGameCamera->GetPos().y,m_pGameCamera->GetPos().z);
         printf("GetTarget %f,%f,%f",m_pGameCamera->GetTarget().x,m_pGameCamera->GetTarget().y,m_pGameCamera->GetTarget().z);

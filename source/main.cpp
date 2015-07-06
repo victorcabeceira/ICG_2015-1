@@ -28,6 +28,11 @@ public:
         m_pGameCamera = NULL;
         m_pEffect = NULL;
         m_scale = -90.0f;
+        rotatecheck =0.0;
+        maxspeed = 70;
+        range = 10;
+        checkpoint_x = listaCheckpoint[0][0];
+        checkpoint_z = listaCheckpoint[0][1];
         m_directionalLight.Color = Vector3f(1.0f, 1.0f, 1.0f);
         m_directionalLight.AmbientIntensity = 1.0f;
         m_directionalLight.DiffuseIntensity = 0.01f;
@@ -40,7 +45,7 @@ public:
         delete m_pGameCamera;
         delete m_mesh_nave;
         delete m_mesh_mapa;
-        delete m_mesh_quad;
+        delete m_mesh_checkpoint;
     }
 
     bool Init()
@@ -63,13 +68,13 @@ public:
 
         m_mesh_nave = new Mesh();
         m_mesh_mapa = new Mesh();
-        m_mesh_quad = new Mesh();
+        m_mesh_checkpoint = new Mesh();
 
         // return m_mesh_nave->LoadMesh("../Content/phoenix_ugv.md2");
         const bool loaded_meshes =
             m_mesh_nave->LoadMesh("../Content/BlueFalcon/blue_falcon.obj") &&
-            m_mesh_mapa->LoadMesh("../Content/Mapa/mapa.obj");
-            //m_mesh_quad->LoadMesh("../Content/quad2.obj");
+            m_mesh_mapa->LoadMesh("../Content/Mapa/mapa.obj")&&
+            m_mesh_checkpoint->LoadMesh("../Content/quad_r.obj");
             // m_mesh_mapa->LoadMesh("../Content/guard/boblampclean.md5mesh");
         return loaded_meshes;
     }
@@ -79,8 +84,8 @@ public:
         GLFWBackendRun(this);
     }
 
-    virtual void RenderSceneCB() override
-    {
+    virtual void RenderSceneCB() override{
+        RotateCheckpoint();
         m_pGameCamera->OnRender();
 
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
@@ -99,8 +104,8 @@ public:
         m_pEffect->SetWorldMatrix(p.GetWorldTrans());
         m_pEffect->SetDirectionalLight(m_directionalLight);
         m_pEffect->SetEyeWorldPos(m_pGameCamera->GetPos());
-        m_pEffect->SetMatSpecularIntensity(0.0f);
-        m_pEffect->SetMatSpecularPower(0);
+        m_pEffect->SetMatSpecularIntensity(5.0f);
+        m_pEffect->SetMatSpecularPower(5);
         m_mesh_mapa->Render();
 
         p.Scale(1.f, 1.f, 1.f);
@@ -119,40 +124,59 @@ public:
           pos[0]= -12.7;
         }
 
-        Vector3f man(pos[0]-10.5f, 5.0f, pos[2]+10.5f);
+        Vector3f man(pos[0]-7.5f, 5.0f, pos[2]+7.5f);
           m_pGameCamera->SetTarget(man);
-          printf("GETtarget %f  %f  %f \n",m_pGameCamera->GetTarget().x,m_pGameCamera->GetTarget().y,m_pGameCamera->GetTarget().z);
-          printf("GETPOS %f  %f  %f \n",m_pGameCamera->GetPos().x,m_pGameCamera->GetPos().y,m_pGameCamera->GetPos().z);
-          printf("GETUP %f  %f  %f \n",m_pGameCamera->GetUp().x,m_pGameCamera->GetUp().y,m_pGameCamera->GetUp().z);
+
         p.Rotate(0.0f, -m_scale + 180.0 , 0.0f);
         calcPosition(flag,aceleracao);
         p.WorldPos(pos[0], 1.5f, pos[2]);
 
-
-
-
-
-
-
         m_pEffect->SetWVP(p.GetWVPTrans());
         m_pEffect->SetWorldMatrix(p.GetWorldTrans());
-        m_mesh_nave->Render();
+        m_pEffect->SetDirectionalLight(m_directionalLight);
+        m_pEffect->SetEyeWorldPos(m_pGameCamera->GetPos());
+        m_pEffect->SetMatSpecularIntensity(5.0f);
+        m_pEffect->SetMatSpecularPower(5);
+       m_mesh_nave->Render();
 
         /*angle = atan2(pos[2],pos[0]) - atan2(posAntiga[2],posAntiga[0]);
         angle = (angle*180.f)/M_PI;
         printf ("%f\n", angle);*/
         //printf ("%f %f %f\n", pos[0], pos[1], pos[2]);
 
-        /*p.Scale(5.0f, 0.0f, 25.0f);
-        p.WorldPos(0.2f, -0.5f, 9.2f);
+        p.Scale(0.01f, 0.01f, 0.01f);
+        //p.WorldPos(44.477566, 2.5f,-2.851082);
+        DetectaCheckpoint();
+        p.WorldPos(checkpoint_x, 2.5f,checkpoint_z);
+
+        p.Rotate(0.0f,rotatecheck,0.0f);
         m_pEffect->SetWVP(p.GetWVPTrans());
         m_pEffect->SetWorldMatrix(p.GetWorldTrans());
-        m_mesh_quad->Render();*/
+        m_mesh_checkpoint->Render();
+        printf("checkpoint_x  %f  checkpoint_z  %f  \n",checkpoint_x,checkpoint_z);
 
         GLFWBackendSwapBuffers();
     }
 
+    void RotateCheckpoint(){
+      rotatecheck += 0.5;
+        if (m_scale >= 360.0f)rotatecheck /= 360.0f;
 
+    }
+    void DetectaCheckpoint(){
+      for(int linha = 0; linha <7 ;linha++){
+        if(linha < 7){
+          if(pos[0]>=listaCheckpoint[0][linha] && pos[0] <= listaCheckpoint[0][linha]+range && pos[2]>=listaCheckpoint[1][linha] && pos[2]<=listaCheckpoint[1][linha] +range  ){
+            checkpoint_x = listaCheckpoint[linha+1][0];
+            checkpoint_z = listaCheckpoint[linha+1][1];
+            printf("linha %d",linha);
+        }
+        }
+        else linha =0;
+    }
+
+
+    }
     virtual void KeyboardCB(OGLDEV_KEY OgldevKey) override
     {
 
@@ -176,8 +200,8 @@ public:
               m_scale /= 360.0f;
         }
         else if(OgldevKey == OGLDEV_KEY_W){
-            if(aceleracao >= 87){
-              aceleracao = 87;
+            if(aceleracao >= maxspeed){
+              aceleracao = maxspeed;
             }
             else{
               flag = ACELERAR;
@@ -271,12 +295,19 @@ private:
     BasicLightingTechnique* m_pEffect;
     Mesh* m_mesh_nave;
     Mesh* m_mesh_mapa;
-    Mesh* m_mesh_quad;
+    Mesh* m_mesh_checkpoint;
     Camera* m_pGameCamera;
+    int maxspeed;
+    float checkpoint_x;
+    float checkpoint_z;
     float m_scale;
     float m_front;
     bool flag;
     float aceleracao = 0.99;
+    float rotatecheck;
+    float listaCheckpoint[7][2]={{44.477566,-2.851082},{33.780846,12.646237},{21.75,21.0},{7.6,18.54},{4.9,3.48},{-9,-7},{9.9,-10.7}};
+
+    int range;
 //  float angle;
 //    float pos[3] = {16.5,1.5,16.5};
     float pos[3] = {12.613994,0.1,-12.114205};

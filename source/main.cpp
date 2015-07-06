@@ -27,7 +27,7 @@ public:
     {
         m_pGameCamera = NULL;
         m_pEffect = NULL;
-        m_scale = 0.0f;
+        m_scale = -90.0f;
         m_directionalLight.Color = Vector3f(1.0f, 1.0f, 1.0f);
         m_directionalLight.AmbientIntensity = 1.0f;
         m_directionalLight.DiffuseIntensity = 0.01f;
@@ -45,7 +45,7 @@ public:
 
     bool Init()
     {
-        Vector3f Pos(-12.776764f, 6.532981f, 16.077847f);
+        Vector3f Pos(2.109013,  8.000000, -1.613770);
         Vector3f Target( pos[0]+0.777163f, -0.133986f, pos[2]+(-0.614871f));
         Vector3f Up( 0.105076, 0.990983f, -0.083134f);
         m_pGameCamera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT, Pos, Target, Up);
@@ -103,14 +103,37 @@ public:
         m_pEffect->SetMatSpecularPower(0);
         m_mesh_mapa->Render();
 
-
-        Vector3f man(pos[0]-10.5f, 8.0f, pos[2]+10.5f);
-          m_pGameCamera->SetTarget(man);
-
         p.Scale(1.f, 1.f, 1.f);
+
+        if(pos[0] >= 50 ){
+          pos[0]=50 ;
+
+        }
+        else if(pos[2]>= 23.3){
+          pos[2]= 23.3;
+        }
+        else if(pos[2]<= -14.4){
+          pos[2]= -14.4;
+        }
+        else if(pos[0]<= -12.7){
+          pos[0]= -12.7;
+        }
+
+        Vector3f man(pos[0]-10.5f, 5.0f, pos[2]+10.5f);
+          m_pGameCamera->SetTarget(man);
+          printf("GETtarget %f  %f  %f \n",m_pGameCamera->GetTarget().x,m_pGameCamera->GetTarget().y,m_pGameCamera->GetTarget().z);
+          printf("GETPOS %f  %f  %f \n",m_pGameCamera->GetPos().x,m_pGameCamera->GetPos().y,m_pGameCamera->GetPos().z);
+          printf("GETUP %f  %f  %f \n",m_pGameCamera->GetUp().x,m_pGameCamera->GetUp().y,m_pGameCamera->GetUp().z);
         p.Rotate(0.0f, -m_scale + 180.0 , 0.0f);
         calcPosition(flag,aceleracao);
         p.WorldPos(pos[0], 1.5f, pos[2]);
+
+
+
+
+
+
+
         m_pEffect->SetWVP(p.GetWVPTrans());
         m_pEffect->SetWorldMatrix(p.GetWorldTrans());
         m_mesh_nave->Render();
@@ -143,18 +166,25 @@ public:
             m_directionalLight.AmbientIntensity -= 0.05f;
         }
         else if(OgldevKey == OGLDEV_KEY_A){
-            m_scale -= 4.0f;
+            m_scale -= 5.0f;
               if (m_scale <= -360.0f)
               m_scale /= 360.0f;
         }
         else if(OgldevKey == OGLDEV_KEY_D){
-            m_scale += 4.0f;
+            m_scale += 5.0f;
               if (m_scale >= 360.0f)
               m_scale /= 360.0f;
         }
         else if(OgldevKey == OGLDEV_KEY_W){
-            flag = ACELERAR;
-            aceleracao *= 1.75;
+            if(aceleracao >= 87){
+              aceleracao = 87;
+            }
+            else{
+              flag = ACELERAR;
+              aceleracao *= 1.75;
+
+            }
+
         }
         else if(OgldevKey == OGLDEV_KEY_S){
           if(aceleracao >= 1.521){
@@ -199,8 +229,8 @@ public:
         }
 
         else if(OgldevKey == OGLDEV_KEY_R){
-          pos[0] = 0;
-          pos[2] = 0;
+          pos[0] = 11.5;
+          pos[2] = -11;
 
         }
       //  m_pGameCamera->OnKeyboard(OgldevKey);
@@ -211,7 +241,8 @@ public:
         printf("GetUp %f,%f,%f\n",m_pGameCamera->GetUp().x,m_pGameCamera->GetUp().y,m_pGameCamera->GetUp().z);*/
 
         printf("aceleracao %f  \n, M_SCALE %f \n",aceleracao,m_scale);
-        printf("Pos %f   %f \n",pos[0],pos[2]);
+        printf("Pos %f  %f  %f \n",pos[0],pos[1],pos[2]);
+
 
     }
     void calcPosition(bool flag,int aceleracao){
@@ -242,13 +273,13 @@ private:
     Mesh* m_mesh_mapa;
     Mesh* m_mesh_quad;
     Camera* m_pGameCamera;
-    float m_scale=0;
+    float m_scale;
     float m_front;
     bool flag;
     float aceleracao = 0.99;
 //  float angle;
 //    float pos[3] = {16.5,1.5,16.5};
-    float pos[3] = {0.1,0.1,0.1};
+    float pos[3] = {12.613994,0.1,-12.114205};
     DirectionalLight m_directionalLight;
 };
 

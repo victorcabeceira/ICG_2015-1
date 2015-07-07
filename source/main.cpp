@@ -30,7 +30,7 @@ public:
         m_scale = -90.0f;
         rotatecheck =0.0;
         maxspeed = 70;
-        range = 10;
+        range = 4;
         checkpoint_x = listaCheckpoint[0][0];
         checkpoint_z = listaCheckpoint[0][1];
         m_directionalLight.Color = Vector3f(1.0f, 1.0f, 1.0f);
@@ -147,13 +147,13 @@ public:
         p.Scale(0.01f, 0.01f, 0.01f);
         //p.WorldPos(44.477566, 2.5f,-2.851082);
         DetectaCheckpoint();
-        p.WorldPos(checkpoint_x, 2.5f,checkpoint_z);
+        p.WorldPos(checkpoint_x, 2.2f,checkpoint_z);
 
         p.Rotate(0.0f,rotatecheck,0.0f);
         m_pEffect->SetWVP(p.GetWVPTrans());
         m_pEffect->SetWorldMatrix(p.GetWorldTrans());
         m_mesh_checkpoint->Render();
-        printf("checkpoint_x  %f  checkpoint_z  %f  \n",checkpoint_x,checkpoint_z);
+        //printf("checkpoint_x  %f  checkpoint_z  %f  \n",checkpoint_x,checkpoint_z);
 
         GLFWBackendSwapBuffers();
     }
@@ -164,15 +164,23 @@ public:
 
     }
     void DetectaCheckpoint(){
-      for(int linha = 0; linha <7 ;linha++){
-        if(linha < 7){
-          if(pos[0]>=listaCheckpoint[0][linha] && pos[0] <= listaCheckpoint[0][linha]+range && pos[2]>=listaCheckpoint[1][linha] && pos[2]<=listaCheckpoint[1][linha] +range  ){
+    int laps = 0;
+      for(int linha = 0; linha <5 ;linha++){
+        if(linha < 5){
+          if(pos[0]>=listaCheckpoint[linha][0] && pos[0] <= listaCheckpoint[linha][0]+range &&
+             pos[2]>=listaCheckpoint[linha][1] && pos[2]<=listaCheckpoint[linha][1] +range  ){
             checkpoint_x = listaCheckpoint[linha+1][0];
             checkpoint_z = listaCheckpoint[linha+1][1];
-            printf("linha %d",linha);
+            //printf("linha %d",linha);
+         }
         }
-        }
-        else linha =0;
+        else {
+
+            linha =0;
+            checkpoint_x = listaCheckpoint[linha][0];
+            checkpoint_z = listaCheckpoint[linha][1];
+            }
+
     }
 
 
@@ -305,7 +313,14 @@ private:
     bool flag;
     float aceleracao = 0.99;
     float rotatecheck;
-    float listaCheckpoint[7][2]={{44.477566,-2.851082},{33.780846,12.646237},{21.75,21.0},{7.6,18.54},{4.9,3.48},{-9,-7},{9.9,-10.7}};
+    float listaCheckpoint[6][2]={
+                                {45,1.5},
+                                {20.5,20.5},
+                                {6.8,19.3},
+                                {-10,-7},
+                                {11, -12.1},
+                                {45, 1.5}
+                                };
 
     int range;
 //  float angle;

@@ -29,7 +29,7 @@ public:
         m_pEffect = NULL;
         m_scale = -90.0f;
         rotatecheck =0.0;
-        maxspeed = 70;
+        maxspeed = 45;
         range = 4;
         checkpoint_x = listaCheckpoint[0][0];
         checkpoint_z = listaCheckpoint[0][1];
@@ -70,12 +70,10 @@ public:
         m_mesh_mapa = new Mesh();
         m_mesh_checkpoint = new Mesh();
 
-        // return m_mesh_nave->LoadMesh("../Content/phoenix_ugv.md2");
         const bool loaded_meshes =
             m_mesh_nave->LoadMesh("../Content/BlueFalcon/blue_falcon.obj") &&
             m_mesh_mapa->LoadMesh("../Content/Mapa/mapa.obj")&&
             m_mesh_checkpoint->LoadMesh("../Content/quad_r.obj");
-            // m_mesh_mapa->LoadMesh("../Content/guard/boblampclean.md5mesh");
         return loaded_meshes;
     }
 
@@ -90,8 +88,7 @@ public:
 
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
-        //m_scale = 286.5f;
-        // std::cout << "scale: " << m_scale << std::endl;
+
 
         Pipeline p;
         p.Scale(1.0f, 1.0f, 1.0f);
@@ -139,9 +136,7 @@ public:
         m_pEffect->SetMatSpecularPower(5);
        m_mesh_nave->Render();
 
-        /*angle = atan2(pos[2],pos[0]) - atan2(posAntiga[2],posAntiga[0]);
-        angle = (angle*180.f)/M_PI;
-        printf ("%f\n", angle);*/
+
         //printf ("%f %f %f\n", pos[0], pos[1], pos[2]);
 
         p.Scale(0.01f, 0.01f, 0.01f);
@@ -213,7 +208,7 @@ public:
             }
             else{
               flag = ACELERAR;
-              aceleracao *= 1.75;
+              aceleracao *= 1.5;
 
             }
 
@@ -235,19 +230,6 @@ public:
 
         }
 
-        /*else if(OgldevKey == OGLDEV_KEY_S){
-          flag =ACELERAR;
-
-          if(aceleracao >= 0.0){
-            aceleracao /= 1.25;
-          }
-          else{
-            aceleracao = 0.99;
-          }
-
-        }
-
-        */
         else if(OgldevKey == OGLDEV_KEY_Z){
           flag =FREIAR;
 
@@ -265,12 +247,6 @@ public:
           pos[2] = -11;
 
         }
-      //  m_pGameCamera->OnKeyboard(OgldevKey);
-
-
-/*        printf("GetPos %f,%f,%f",m_pGameCamera->GetPos().x,m_pGameCamera->GetPos().y,m_pGameCamera->GetPos().z);
-        printf("GetTarget %f,%f,%f",m_pGameCamera->GetTarget().x,m_pGameCamera->GetTarget().y,m_pGameCamera->GetTarget().z);
-        printf("GetUp %f,%f,%f\n",m_pGameCamera->GetUp().x,m_pGameCamera->GetUp().y,m_pGameCamera->GetUp().z);*/
 
         printf("aceleracao %f  \n, M_SCALE %f \n",aceleracao,m_scale);
         printf("Pos %f  %f  %f \n",pos[0],pos[1],pos[2]);
@@ -323,8 +299,7 @@ private:
                                 };
 
     int range;
-//  float angle;
-//    float pos[3] = {16.5,1.5,16.5};
+
     float pos[3] = {12.613994,0.1,-12.114205};
     DirectionalLight m_directionalLight;
 };
@@ -334,7 +309,6 @@ int main(int argc, char** argv)
 {
     GLFWBackendInit(argc, argv, true, false);
 
-    //bool GLFWBackendCreateWindow(unsigned int Width, unsigned int Height, bool isFullScreen, const char* pTitle);
     if (!GLFWBackendCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, false, "Nave hardcore")) {
         return 1;
     }

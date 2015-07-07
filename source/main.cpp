@@ -73,7 +73,7 @@ public:
         const bool loaded_meshes =
             m_mesh_nave->LoadMesh("../Content/BlueFalcon/blue_falcon.obj") &&
             m_mesh_mapa->LoadMesh("../Content/Mapa/mapa.obj")&&
-            m_mesh_checkpoint->LoadMesh("../Content/quad_r.obj");
+            m_mesh_checkpoint->LoadMesh("../Content/Cubo/quad_r.obj");
         return loaded_meshes;
     }
 
